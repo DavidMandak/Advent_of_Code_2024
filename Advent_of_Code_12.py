@@ -13,7 +13,6 @@ for line in lines:
 
 def generate(j, place, row):
     if place == count:
-        print(row)
         check(row)
     else:
         store = row
@@ -26,6 +25,7 @@ def generate(j, place, row):
 
 def check(row):
     global total
+    row += "."
     a = 0
     sequence = None
     checking = False
@@ -42,6 +42,7 @@ def check(row):
             checking = True
             sequence = records[0][a]-1
     total += 1
+    print(row)
 
 
 row = springs[0]
@@ -54,9 +55,5 @@ for i in range(0, len(row)):
         count -= 1
     elif row[i] == "?":
         unknown.append(i)
-for i in range(0, len(unknown)-count+1):
-    row = springs[0]
-    index = unknown[i]
-    row = row[:index]+"#"+row[index+1:]
-    generate(i+1, 1, row)
+generate(0, 0, springs[0])
 print(total)
