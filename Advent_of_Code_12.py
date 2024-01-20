@@ -11,19 +11,19 @@ for line in lines:
     records.append(record)
 
 
-def generate(j, place, row):
+def generate(j, place, row, record):
     if place == count:
-        check(row)
+        check(row, record)
     else:
         store = row
         for i in range(j, len(unknown)-count+1+place):
             row = store
             index = unknown[i]
             row = row[:index] + "#" + row[index+1:]
-            generate(i+1, place+1, row)
+            generate(i+1, place+1, row, record)
 
 
-def check(row):
+def check(row, record):
     global total
     row += "."
     a = 0
@@ -40,20 +40,20 @@ def check(row):
                 return
         elif spring == "#":
             checking = True
-            sequence = records[0][a]-1
+            sequence = record[a]-1
     total += 1
-    print(row)
 
 
-row = springs[0]
-count = 0
-for num in records[0]:
-    count += num
-unknown = []
-for i in range(0, len(row)):
-    if row[i] == "#":
-        count -= 1
-    elif row[i] == "?":
-        unknown.append(i)
-generate(0, 0, springs[0])
+for i in range(0, len(lines)):
+    row = springs[i]
+    count = 0
+    for num in records[i]:
+        count += num
+    unknown = []
+    for j in range(0, len(row)):
+        if row[j] == "#":
+            count -= 1
+        elif row[j] == "?":
+            unknown.append(j)
+    generate(0, 0, springs[i], records[i])
 print(total)
