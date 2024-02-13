@@ -11,16 +11,18 @@ def search(grid, axis):
     for i in range(1, len(grid)):
         if grid[i] == grid[i-1]:
             if len(grid)-i < i:
-                check(i, len(grid)-i, grid, axis)
+                if check(i, len(grid)-i, grid, axis) is not False:
+                    return True
             else:
-                check(i, i, grid, axis)
+                if check(i, i, grid, axis) is not False:
+                    return True
 
 
 def check(i, size, grid, axis):
     global horizontal, vertical
     for y in range(1, size+1):
         if grid[i+y-1] != grid[i-y]:
-            return
+            return False
     if axis == "y":
         vertical += i
     else:
@@ -28,14 +30,13 @@ def check(i, size, grid, axis):
 
 
 for pattern in patterns:
-    save = (vertical, horizontal)
     pattern = pattern.splitlines()
-    search(pattern, "x")
-    columns = []
-    for x in range(0, len(pattern[0])):
-        column = ""
-        for y in range(0, len(pattern)):
-            column += pattern[y][x]
-        columns.append(column)
-    search(columns, "y")
+    if search(pattern, "x") is not True:
+        columns = []
+        for x in range(0, len(pattern[0])):
+            column = ""
+            for y in range(0, len(pattern)):
+                column += pattern[y][x]
+            columns.append(column)
+        search(columns, "y")
 print(vertical+100*horizontal)
