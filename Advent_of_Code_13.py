@@ -1,5 +1,4 @@
 patterns = open("Advent_of_Code_13.txt").read().split("\n\n")
-practise = open("test.txt").read().split("\n\n")
 vertical = 0
 horizontal = 0
 
