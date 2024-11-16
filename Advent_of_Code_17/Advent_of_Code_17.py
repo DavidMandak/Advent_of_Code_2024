@@ -1,4 +1,5 @@
-lines = open("test.txt").read().splitlines()
+lines1 = open("Advent_of_Code_17.txt").read().splitlines()
+lines = open("../test.txt").read().splitlines()
 values = []
 huh = []
 for y in range(0, len(lines)):
