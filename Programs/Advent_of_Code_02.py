@@ -3,26 +3,18 @@ lines = open("../Inputs/Advent_of_Code_02.txt").read().splitlines()
 total = 0
 for line in lines:
     line = list(map(int, line.split()))
-    good = True
-    for i in range(1, len(line)-1):
+    for i in range(len(line)-1):
         if line[i] < line[i+1] <= line[i]+3:
             pass
         else:
             total -= 1
-            good = False
             break
-    if good is True and line[0] == line[1]:
-        total -= 1
-    good = True
-    for i in range(1, len(line)-1):
+    for i in range(len(line)-1):
         if line[i] > line[i+1] >= line[i]-3:
             pass
         else:
             total -= 1
-            good = False
             break
-    if good is True and line[0] == line[1]:
-        total -= 1
     total += 2
 print(total)
 
