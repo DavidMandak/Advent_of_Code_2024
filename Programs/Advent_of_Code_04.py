@@ -6,7 +6,7 @@ def check(x, y, string):
   if lines[y][x:x+4] == string:
     total += 1
   for a, b in directions:
-    if all(lines[y+i*a][x+i*a] == string[i] for i in range(1, 4)):
+    if all(lines[y+i*a][x+i*b] == string[i] for i in range(1, 4)):
       total += 1
 
 
