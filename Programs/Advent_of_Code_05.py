@@ -1,19 +1,25 @@
 from collections import defaultdict
-lines = open("../Inputs/test.txt").read().split("\n\n")
+lines = open("../Inputs/Advent_of_Code_05.txt").read().split("\n\n")
 
 rules = defaultdict(list)
 pairs = lines[0].splitlines()
 updates = lines[1].splitlines()
 for pair in pairs:
     a, b = map(int, pair.split("|"))
-    rules[b].append(a)
+    rules[a].append(b)
 
 total = 0
 for update in updates:
-    line = map(int, update.split(","))
+    line = list(map(int, update.split(",")))
     check = [line[0]]
+    good = True
     for num in line[1:]:
         for x in rules[num]:
             if x in check:
-              total -= 1
-              break
+                good = False
+        if good is False:
+            break
+        check.append(num)
+    if good is True:
+        total += line[len(line)//2]
+print(total)
