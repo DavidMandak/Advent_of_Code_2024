@@ -13,13 +13,31 @@ for update in updates:
     line = list(map(int, update.split(",")))
     check = [line[0]]
     good = True
-    for num in line[1:]:
-        for x in rules[num]:
-            if x in check:
+    for i in range(1, len(line)):
+        for x in rules[line[i]]:
+            if x in line[:i]:
                 good = False
         if good is False:
             break
-        check.append(num)
     if good is True:
         total += line[len(line)//2]
+print(total)
+
+
+def f(line):
+    for i in range(1, len(line)):
+        for x in rules[line[i]]:
+            if x in line[:i]:
+                line.insert(line.index(x), line[i])
+                line.pop(i+1)
+                return False
+
+
+total = 0
+for update in updates:
+    line = list(map(int, update.split(",")))
+    k = 0
+    while f(line) is False:
+        k = 1
+    total += k*line[len(line)//2]
 print(total)

@@ -1,4 +1,10 @@
-a = 0
-for i in range(25) and a < 15:
-    a += i
-    print(a)
+a = [0, 1, 2, 3]
+
+
+def f(b):
+    return 5
+    b.pop(3)
+
+
+print(f(a))
+print(a)
