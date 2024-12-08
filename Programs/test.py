@@ -1,6 +1,2 @@
-def f():
-    pass
-
-
-if f():
-    print(5)
+for k in range(-1):
+    print(8)
