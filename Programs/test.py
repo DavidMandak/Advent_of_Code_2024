@@ -1,5 +1,3 @@
-from collections import defaultdict
-a = defaultdict(int)
-b = a.copy()
-b[5] += 1
-print(a, b)
+a = 5
+a = 1 if a == 5 else -1
+print(a)
