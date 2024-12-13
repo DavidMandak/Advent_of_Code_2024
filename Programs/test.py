@@ -1,3 +1,1 @@
-a = 5
-a = 1 if a == 5 else -1
-print(a)
+print(40.445678987654.is_integer())
