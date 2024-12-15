@@ -4,7 +4,7 @@ warehouse = list(map(list, warehouse.splitlines()))
 save = copy.deepcopy(warehouse)
 moves = moves.replace("\n", "")
 
-start_x, start_y = 4, 4
+start_x, start_y = 24, 24
 warehouse[start_y][start_x] = "."
 for move in moves:
     if move == "^":
@@ -59,28 +59,39 @@ def horizontal(x, y, dx):
         return False
     elif tile == ".":
         return True
-    elif horizontal(x+dx, y, dx):
-        warehouse[y][x+dx] = warehouse[y][x+dx]
+    elif horizontal(x+2*dx, y, dx):
+        warehouse[y][x+2*dx] = warehouse[y][x+dx]
         warehouse[y][x+dx] = tile
         return True
     return False
 
 
-def vertical(x, y, dy):
+def vertical(pos, dy):
     global warehouse
-    tile = warehouse[y][x]
-    if tile == "#":
-        return False
-    elif tile == ".":
+    if len(pos) == 0:
         return True
-    elif tile == "[":
-        k = 1
-    else:
-        k = -1
-    if vertical(x, y+dy, dy) and vertical(x+k, y+dy, dy):
-        warehouse[y+dy][x] = warehouse[y][x]
-        warehouse[y+dy][x+k] = warehouse[y][x+k]
-        warehouse[y][x+k] = "."
+    check = []
+    for x, y in pos:
+        tile = warehouse[y][x]
+        if tile == "#":
+            return False
+        elif tile == "[":
+            check.append((x, y+dy))
+            check.append((x+1, y+dy))
+        elif tile == "]":
+            check.append((x, y+dy))
+            check.append((x-1, y+dy))
+    if vertical(check, dy):
+        for x, y in pos:
+            tile = warehouse[y][x]
+            if tile == "[":
+                warehouse[y+dy][x] = "["
+                warehouse[y+dy][x+1] = "]"
+                warehouse[y][x+1] = "."
+            elif tile == "]":
+                warehouse[y+dy][x] = "]"
+                warehouse[y+dy][x-1] = "["
+                warehouse[y][x-1] = "."
         return True
     return False
 
@@ -102,7 +113,7 @@ for move in moves:
             if horizontal(x, y, dx):
                 warehouse[y][x] = "."
                 start_x, start_y = x, y
-        elif vertical(x, y, dy):
+        elif vertical([(x, y)], dy):
             warehouse[y][x] = "."
             start_x, start_y = x, y
 total = 0
@@ -111,9 +122,3 @@ for y in range(1, len(warehouse)-1):
         if warehouse[y][x] == "[":
             total += 100*y+x
 print(total)
-
-for line in warehouse:
-    for tile in line:
-        print(tile, end="")
-    print()
-print()
