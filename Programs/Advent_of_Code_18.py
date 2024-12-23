@@ -36,7 +36,7 @@ print(grid[size-1][size-1])
 def step(x, y, steps, path):
     global grid, goal
     grid[y][x] = steps
-    path += str(x)+","+str(y)+", "
+    path += f"{x},{y}, "
     if (x, y) != (size-1, size-1):
         steps += 1
         dx, dy = 1, 0
