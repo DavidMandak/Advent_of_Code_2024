@@ -1,6 +1,3 @@
-
-a = "1235 5 5 "
-print([b+"5" for b in a.split("5 ")])
-a = "123"
-a = a.split("3")
+a = ["mps", "z25", "z19", "z13", "vcv", "vwp", "vjv", "cqm"]
+a.sort()
 print(a)
