@@ -59,10 +59,7 @@ while pos < len(program):
     pos += 2
 print(output[:-1])
 
-a = int("5600137262025050", 8)
-diff = (2**51-2**48)//10000000
-diff = 1
-length = 0
+a = 0
 i = 1
 sequences = []
 seq = ""
@@ -86,28 +83,8 @@ while output[:-1] != check:
         else:
             adv(oper, instruction % 5)
         pos += 2
-    if output[:-1] == check:
-        print(a)
-        print(output)
-        exit()
-    if output[:-1] == check[len(check)-len(output)+1:] and len(output) > length:
-        print(oct(a))
-        print(output)
-    a += diff
-pattern = str(sequences)[1:-1].replace("\'", "").replace(", ", "")
-
-i = 0
-seq += output[0]
-if i == 8:
-    if seq in sequences:
-        print(seq)
-        print(sequences)
-        #break
-    else:
-        sequences.append(seq)
-    seq = ""
-    i = 0
-i += 1
-# Previous: 1619150575507484
-# Current: 1619150575632384
-# output[-26:-1] == "1,7,5,1,4,0,3,4,5,5,5,3,0"
+    if output[:-1] == check[len(check)-len(output)+1:]:
+        a = int(oct(a)+"0", 8)
+        continue
+    a += 1
+print(int(oct(a)[:-1], 8))
