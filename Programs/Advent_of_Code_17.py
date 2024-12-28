@@ -59,10 +59,13 @@ while pos < len(program):
     pos += 2
 print(output[:-1])
 
-a = 1619150575632384
+a = int("5600137262025050", 8)
 diff = (2**51-2**48)//10000000
-diff = -1
+diff = 1
 length = 0
+i = 1
+sequences = []
+seq = ""
 while output[:-1] != check:
     registers = [a, 0, 0]
     output = ""
@@ -83,21 +86,28 @@ while output[:-1] != check:
         else:
             adv(oper, instruction % 5)
         pos += 2
-    if output[-26:-1] == "1,7,5,1,4,0,3,4,5,5,5,3,0":
+    if output[:-1] == check:
         print(a)
         print(output)
         exit()
-    if len(output[:-1]) > length:
-        print(a, length//2+1)
-        length = len(output[:-1])
-    print(output)
+    if output[:-1] == check[len(check)-len(output)+1:] and len(output) > length:
+        print(oct(a))
+        print(output)
     a += diff
-print(a+1)
+pattern = str(sequences)[1:-1].replace("\'", "").replace(", ", "")
 
-if output[-4:-1] == "3,0":
-    print(a)
-    print(output)
-    exit()
-
+i = 0
+seq += output[0]
+if i == 8:
+    if seq in sequences:
+        print(seq)
+        print(sequences)
+        #break
+    else:
+        sequences.append(seq)
+    seq = ""
+    i = 0
+i += 1
 # Previous: 1619150575507484
 # Current: 1619150575632384
+# output[-26:-1] == "1,7,5,1,4,0,3,4,5,5,5,3,0"

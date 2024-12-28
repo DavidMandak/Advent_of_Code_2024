@@ -1,3 +1,1 @@
-a = ["mps", "z25", "z19", "z13", "vcv", "vwp", "vjv", "cqm"]
-a.sort()
-print(a)
+print(int("5600134", 8))
